@@ -126,6 +126,24 @@ class BondFunctions {
                     *(boost::dynamic_pointer_cast<Bond>(bond)),
                     settlementDate);
         }
+        static Time accruedPeriod(const BondPtr& bond,
+                                  Date settlementDate = Date()) {
+            return QuantLib::BondFunctions::accruedPeriod(
+                    *(boost::dynamic_pointer_cast<Bond>(bond)),
+                    settlementDate);
+        }
+        static BigInteger accruedDays(const BondPtr& bond,
+                                      Date settlementDate = Date()) {
+            return QuantLib::BondFunctions::accruedDays(
+                    *(boost::dynamic_pointer_cast<Bond>(bond)),
+                    settlementDate);
+        }
+        static Real accruedAmount(const BondPtr& bond,
+                                  Date settlementDate = Date()) {
+            return QuantLib::BondFunctions::accruedAmount(
+                    *(boost::dynamic_pointer_cast<Bond>(bond)),
+                    settlementDate);
+        }
         static Real cleanPrice(
                    const BondPtr& bond,
                    const boost::shared_ptr<YieldTermStructure>& discountCurve,
@@ -306,6 +324,22 @@ class BondFunctions {
             return QuantLib::BondFunctions::yieldValueBasisPoint(
                         *(boost::dynamic_pointer_cast<Bond>(bond)),
                         yield,
+                        dayCounter,
+                        compounding,
+                        frequency,
+                        settlementDate);
+        }
+        static Real cleanPrice(const BondPtr& bond,
+                               const boost::shared_ptr<YieldTermStructure>& discountCurve,
+                               Spread zSpread,
+                               const DayCounter& dayCounter,
+                               Compounding compounding,
+                               Frequency frequency,
+                               Date settlementDate = Date()) {
+            return QuantLib::BondFunctions::cleanPrice(
+                        *(boost::dynamic_pointer_cast<Bond>(bond)),
+                        discountCurve, 
+                        zSpread,
                         dayCounter,
                         compounding,
                         frequency,

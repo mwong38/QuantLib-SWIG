@@ -263,6 +263,33 @@ class LiborPtr : public IborIndexPtr {
     }
 };
 
+%{
+using QuantLib::DailyTenorLibor;
+typedef boost::shared_ptr<Index> DailyTenorLiborPtr;
+%}
+
+%rename(DailyTenorLibor) DailyTenorLiborPtr;
+class DailyTenorLiborPtr : public IborIndexPtr {
+  public:
+    %extend{
+        DailyTenorLiborPtr(const std::string& familyName,
+              Natural settlementDays,
+              const Currency& currency,
+              const Calendar& financialCenterCalendar,
+              const DayCounter& dayCounter,
+              const Handle<YieldTermStructure>& h =
+                Handle<YieldTermStructure>()){
+            return new DailyTenorLiborPtr(
+                new DailyTenorLibor(familyName,
+                          settlementDays,
+                          currency,
+                          financialCenterCalendar,
+                          dayCounter,
+                          h));
+        }
+    }
+};
+
 
 %define export_xibor_instance(Name)
 %{
@@ -289,6 +316,41 @@ typedef boost::shared_ptr<Index> Name##Ptr;
 %}
 %rename(Name) Name##Ptr;
 class Name##Ptr : public Base##Ptr {
+  public:
+    %extend {
+      Name##Ptr(const Handle<YieldTermStructure>& h =
+                                    Handle<YieldTermStructure>()) {
+          return new Name##Ptr(new Name(h));
+      }
+    }
+};
+%enddef
+
+%define export_dailytenor_xibor_instance(Name)
+%{
+using QuantLib::Name;
+typedef boost::shared_ptr<Index> Name##Ptr;
+%}
+%rename(Name) Name##Ptr;
+class Name##Ptr : public IborIndexPtr {
+  public:
+    %extend {
+      Name##Ptr(Natural settlementDays,
+                const Handle<YieldTermStructure>& h =
+                                    Handle<YieldTermStructure>()) {
+          return new Name##Ptr(new Name(settlementDays,h));
+      }
+    }
+};
+%enddef
+
+%define export_overnight_xibor_instance(Name)
+%{
+using QuantLib::Name;
+typedef boost::shared_ptr<Index> Name##Ptr;
+%}
+%rename(Name) Name##Ptr;
+class Name##Ptr : public IborIndexPtr {
   public:
     %extend {
       Name##Ptr(const Handle<YieldTermStructure>& h =
@@ -493,6 +555,14 @@ export_xibor_instance(TRLibor);
 export_xibor_instance(USDLibor);
 export_xibor_instance(Zibor);
 
+export_dailytenor_xibor_instance(DailyTenorCHFLibor);
+export_dailytenor_xibor_instance(DailyTenorGBPLibor);
+export_dailytenor_xibor_instance(DailyTenorJPYLibor);
+export_dailytenor_xibor_instance(DailyTenorUSDLibor);
+export_overnight_xibor_instance(CADLiborON);
+export_overnight_xibor_instance(GBPLiborON);
+export_overnight_xibor_instance(USDLiborON);
+
 export_overnight_instance(Eonia);
 export_overnight_instance(Sonia);
 export_overnight_instance(FedFunds);
@@ -504,6 +574,9 @@ export_swap_instance(EuriborSwapIfrFix);
 export_swap_instance(EurLiborSwapIsdaFixA);
 export_swap_instance(EurLiborSwapIsdaFixB);
 export_swap_instance(EurLiborSwapIfrFix);
+
+export_swap_instance(UsdLiborSwapIsdaFixAm);
+export_swap_instance(UsdLiborSwapIsdaFixPm);
 
 
 #endif
