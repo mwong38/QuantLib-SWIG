@@ -495,6 +495,22 @@ export_xibor_instance(Cdor);
 export_xibor_instance(CHFLibor);
 export_xibor_instance(DKKLibor);
 
+export_xibor_instance(Bbsw);
+export_quoted_xibor_instance(Bbsw1M,Bbsw);
+export_quoted_xibor_instance(Bbsw2M,Bbsw);
+export_quoted_xibor_instance(Bbsw3M,Bbsw);
+export_quoted_xibor_instance(Bbsw4M,Bbsw);
+export_quoted_xibor_instance(Bbsw5M,Bbsw);
+export_quoted_xibor_instance(Bbsw6M,Bbsw);
+
+export_xibor_instance(Bkbm);
+export_quoted_xibor_instance(Bkbm1M,Bkbm);
+export_quoted_xibor_instance(Bkbm2M,Bkbm);
+export_quoted_xibor_instance(Bkbm3M,Bkbm);
+export_quoted_xibor_instance(Bkbm4M,Bkbm);
+export_quoted_xibor_instance(Bkbm5M,Bkbm);
+export_quoted_xibor_instance(Bkbm6M,Bkbm);
+
 export_xibor_instance(Euribor);
 export_quoted_xibor_instance(EuriborSW,Euribor);
 export_quoted_xibor_instance(Euribor2W,Euribor);
@@ -563,9 +579,11 @@ export_overnight_xibor_instance(CADLiborON);
 export_overnight_xibor_instance(GBPLiborON);
 export_overnight_xibor_instance(USDLiborON);
 
+export_overnight_instance(Aonia);
 export_overnight_instance(Eonia);
 export_overnight_instance(Sonia);
 export_overnight_instance(FedFunds);
+export_overnight_instance(Nzocr);
 
 export_swap_instance(EuriborSwapIsdaFixA);
 export_swap_instance(EuriborSwapIsdaFixB);

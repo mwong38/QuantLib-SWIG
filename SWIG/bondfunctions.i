@@ -1,6 +1,7 @@
 
 /*
  Copyright (C) 2013 Simon Shakeshaft
+ Copyright (C) 2016 Gouthaman Balaraman
 
  This file is part of QuantLib, a free-software/open-source library
  for financial quantitative analysts and developers - http://quantlib.org/
@@ -44,6 +45,9 @@ class BondFunctions {
     %rename("accrual-end-date")           accrualEndDate;
     %rename("accrual-period")             accrualPeriod;
     %rename("accrual-days")               accrualDays;
+    %rename("accrued-period")             accruedPeriod;
+    %rename("accrued-days")               accruedDays;
+    %rename("accrued-amount")             accruedAmount;
     %rename("clean-price")                cleanPrice;
     %rename("atm-rate")                   atmRate;
     %rename("basis-point-value")          basisPointValue;
@@ -368,6 +372,7 @@ class BondFunctions {
                         guess);
             
         }
+        
     }
 };
 
